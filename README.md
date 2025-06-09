@@ -1,87 +1,110 @@
-# 0x Swap API v2 Demo App (Next.js App Router)
+# AhmadSwap
 
-An example ERC-20 swap application built on [Next.js App Router](https://nextjs.org/docs) with 0x Swap API v2 (Permit2) and [RainbowKit](https://www.rainbowkit.com/).
+A decentralized token swapping application built on Ethereum, providing seamless token exchanges with real-time price quotes and intuitive user experience.
 
-Swap API enables your users to easily and conveniently trade tokens at the best prices directly in your app. With one simple integration, 0x unlocks thousands of tokens on the most popular blockchains and aggregated liquidity from 100+ AMMs and professional market makers.
+## Features
 
-This demo app covers best practices for how to use the 0x Swap API's price endpoint for indicative pricing and the quote endpoint for firm quotes.
+- 🔄 **Token Swapping** - Swap ERC-20 tokens on Ethereum network
+- 💰 **Real-time Price Quotes** - Get live pricing information before swapping
+- 📊 **Price Viewing** - Monitor token prices and market data
+- 🔗 **Wallet Integration** - Connect with popular wallets via WalletConnect
+- 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
 
-> [!WARNING]  
-> This is a demo, and is not ready for production use. The code has not been audited and does not account for all error handling. Use at your own risk.
+## Tech Stack
 
-### Live Demo
-
-Checkout the live demo 👉 [here](https://0x-swap-v2-demo-app.vercel.app/)
-
-### Price View
-
-![priceView](src/images/priceView.png)
-
-### Quote View
-
-![quoteView](src/images/quoteView.png)
-
-Demonstrates the following on Base mainnet:
-
-1. [Get a 0x API key](https://0x.org/docs/introduction/getting-started)
-2. Get an indicative price (sell 0.1 USDC → buy WETH)
-3. (If needed) Set token allowance for Permit2
-4. Fetch a firm quote (sell 0.1 USDC → buy WETH)
-5. Sign the Permit2 EIP-712 message
-6. Submit the transaction with permit2 signature
-
-### What is the difference between Permit2 and AllowanceHolder?
-
-<details>
-
-<summary>Read more about when to use AllowanceHolder vs Permit2</summary>
-
-0x Swap API offers you the optionality to either use [Permit2](https://0x.org/docs/next/introduction/0x-cheat-sheet#permit2-contract) or [AllowanceHolder](https://0x.org/docs/next/introduction/0x-cheat-sheet#allowanceholder-contract) as the allowance target.
-
-For most applications, we recommend using the Permit2 flow for swaps and setting allowances on the Permit2 contract. This process requires collecting two signatures from your users per trade: one offchain signature for the limited approval and an onchain signature for the trade.
-
-While Permit2's single-use method provides greatly enhanced security, we recognize that some projects may not wish to have a double-signature UX (this may apply to teams that integrate Swap API into smart contracts, or teams that are aggregating across multiple sources and want to keep the UI consistent across all the integrations).
-
-If your integration prevents you from collecting offchain signatures, such as with smart contracts, we recommend using AllowanceHolder.
-
-Originally developed by Uniswap based on the work of 0x alumnus [Lawrence Forman](https://github.com/merklejerk), [Permit2](https://blog.uniswap.org/permit2-and-universal-router) is a token approval method that can be used to safely share and manage token approvals across different smart contracts. Permit2 is immutable, extensively audited, used by other trusted protocols in the space including Uniswap and has a [$3M bug bounty](https://uniswap.org/bug-bounty).
-
-Still have questions? [Reach out to our team](https://0x.org/docs/introduction/community#contact-support).
-
-</details>
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: Tailwind CSS
+- **Blockchain**: Ethereum
+- **Wallet Connection**: RainbowKit, wagmi, WalletConnect (Reown Cloud)
+- **DEX Integration**: 0x API
+- **Image Optimization**: Next.js Image component
 
 ## Getting Started
 
-1. Create a `.env` file and setup the required environment variables
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+- MetaMask or compatible Ethereum wallet
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/ahmadswap.git
+cd ahmadswap
 ```
-cp .env.example .env
-```
 
-| **API Keys**            | **Description**                                                                                                  | **Code**                                                                                     |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| WalletConnect projectId | WalletConnect's SDK to help with connecting wallets (create one [here](https://cloud.walletconnect.com/sign-in)) | Add [here](https://github.com/0xProject/0x-examples/blob/main/swap-v2-next-app/.env.example) |
-| 0x                      | 0x API key (create one [here](https://0x.org/docs/introduction/getting-started))                                 | Add [here](https://github.com/0xProject/0x-examples/blob/main/swap-v2-next-app/.env.example) |
-
-2. Install project dependencies
-
-```
+2. Install dependencies
+```bash
 npm install
+# or
+yarn install
 ```
 
-3. Start the Next.js development server
-
+3. Set up environment variables
+```bash
+cp .env.example .env.local
 ```
+
+Add your environment variables:
+```env
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+NEXT_PUBLIC_0X_API_KEY=your_0x_api_key
+```
+
+4. Run the development server
+```bash
 npm run dev
+# or
+yarn dev
 ```
 
-4. Navigate to [http://localhost:3000](http://localhost:3000)
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+## Usage
+
+1. **Connect Wallet**: Click the "Connect Wallet" button and select your preferred wallet
+2. **Select Tokens**: Choose the tokens you want to swap from and to
+3. **Enter Amount**: Input the amount you wish to swap
+4. **Get Quote**: View the real-time price quote and exchange rate
+5. **Execute Swap**: Confirm the transaction in your wallet
+
+## Configuration
+
+### Adding New Tokens
+
+Tokens are configured in the `MAINNET_TOKENS_BY_SYMBOL` object. To add new tokens:
+
+```javascript
+MAINNET_TOKENS_BY_SYMBOL['TOKEN_SYMBOL'] = {
+  address: '0x...',
+  symbol: 'TOKEN_SYMBOL',
+  name: 'Token Name',
+  decimals: 18,
+  logoURI: 'https://...'
+}
 ```
-open http://localhost:3000
-```
 
-## Supported Networks
 
-See [here](https://0x.org/docs/introduction/0x-cheat-sheet#-chain-support) for the latest list of supported networks.
+## API Integration
+
+This project integrates with:
+- **0x API**: For fetching quotes and executing swaps
+- **WalletConnect (Reown Cloud)**: For wallet connectivity
+
+## Roadmap
+
+- [ ] Multi-chain support (Polygon, BSC, Arbitrum)
+- [ ] Advanced trading features (limit orders, stop-loss)
+- [ ] Portfolio tracking
+- [ ] Historical price charts
+- [ ] Liquidity pool information
+
+
+## Disclaimer!!!!
+
+This is experimental software. Use at your own risk. Always verify transactions before confirming swaps.
+
+---
 
