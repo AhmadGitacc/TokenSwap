@@ -58,7 +58,6 @@ const config = getDefaultConfig({
   appName: 'TekSwap',
   projectId,
   chains: [mainnet],
-  connectors,
   ssr: true,
 });
 
