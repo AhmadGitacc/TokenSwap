@@ -17,50 +17,6 @@ A decentralized token swapping application built on Ethereum, providing seamless
 - **Blockchain**: Ethereum
 - **Wallet Connection**: RainbowKit, wagmi, WalletConnect (Reown Cloud)
 - **DEX Integration**: 0x API
-- **Image Optimization**: Next.js Image component
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-- MetaMask or compatible Ethereum wallet
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/ahmadswap.git
-cd ahmadswap
-```
-
-2. Install dependencies
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Set up environment variables
-```bash
-cp .env.example .env.local
-```
-
-Add your environment variables:
-```env
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
-NEXT_PUBLIC_0X_API_KEY=your_0x_api_key
-```
-
-4. Run the development server
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Usage
 
@@ -93,7 +49,7 @@ This project integrates with:
 - **0x API**: For fetching quotes and executing swaps
 - **WalletConnect (Reown Cloud)**: For wallet connectivity
 
-## Roadmap
+## Roadmap 
 
 - [ ] Multi-chain support (Polygon, BSC, Arbitrum)
 - [ ] Advanced trading features (limit orders, stop-loss)
