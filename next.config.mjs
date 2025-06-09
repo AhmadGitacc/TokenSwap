@@ -3,18 +3,32 @@ const nextConfig = {
   images: {
     domains: ["raw.githubusercontent.com", "https://isthiscoinascam.com", "https://www.cryptologos.cc",],
   },
-  webpack: (config) => {
-    config.externals.push('pino-pretty', 'lokijs', 'encoding');
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+        stream: false,
+        url: false,
+        zlib: false,
+        http: false,
+        https: false,
+        assert: false,
+        os: false,
+        path: false,
+      };
+    }
 
-    // Handle worker files
-    config.module.rules.push({
-      test: /\.worker\.js$/,
-      use: { loader: 'worker-loader' },
-    });
+    // Handle ES modules in workers
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
 
     return config;
   },
-  transpilePackages: ['@rainbow-me/rainbowkit'],
 };
 
 export default nextConfig;
