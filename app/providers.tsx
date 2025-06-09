@@ -12,8 +12,6 @@ import {
   trustWallet,
   ledgerWallet,
   rainbowWallet,
-  binanceWallet,
-  bitgetWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, createConfig, http } from "wagmi";
@@ -30,9 +28,8 @@ const connectors = connectorsForWallets(
       groupName: "Other",
       wallets: [
         trustWallet,
-        // binanceWallet,
         rainbowWallet,
-        // bitgetWallet,
+        argentWallet,
         ledgerWallet,
       ],
     },
@@ -57,22 +54,22 @@ const mainnet = {
   },
 };
 
-// const config = createConfig({
-//   chains: [mainnet],
-//   // turn off injected provider discovery
-//   multiInjectedProviderDiscovery: false,
-//   connectors,
-//   ssr: true,
-//   transports: { [mainnet.id]: http() },
-// });
-
-const config = getDefaultConfig({
-  appName: 'AhmadSwap',
-  projectId,
+const config = createConfig({
   chains: [mainnet],
+  // turn off injected provider discovery
+  multiInjectedProviderDiscovery: false,
   connectors,
   ssr: true,
+  transports: { [mainnet.id]: http() },
 });
+
+// const config = getDefaultConfig({
+//   appName: 'AhmadSwap',
+//   projectId,
+//   chains: [mainnet],
+//   connectors,
+//   ssr: true,
+// });
 
 const queryClient = new QueryClient();
 
