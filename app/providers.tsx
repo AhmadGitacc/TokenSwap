@@ -6,7 +6,6 @@ import {
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import {
-  coinbaseWallet,
   metaMaskWallet,
   argentWallet,
   trustWallet,
@@ -17,7 +16,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, createConfig, http } from "wagmi";
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string;
-coinbaseWallet.preference = "smartWalletOnly";
 
 const connectors = connectorsForWallets(
   [
@@ -28,10 +26,9 @@ const connectors = connectorsForWallets(
     {
       groupName: "Other",
       wallets: [
-        rainbowWallet,
-        coinbaseWallet,
-        argentWallet,
         trustWallet,
+        rainbowWallet,
+        argentWallet,
         ledgerWallet,
       ],
     },
