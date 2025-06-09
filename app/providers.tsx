@@ -30,9 +30,9 @@ const connectors = connectorsForWallets(
       groupName: "Other",
       wallets: [
         trustWallet,
-        binanceWallet,
+        // binanceWallet,
         rainbowWallet,
-        bitgetWallet,
+        // bitgetWallet,
         ledgerWallet,
       ],
     },
