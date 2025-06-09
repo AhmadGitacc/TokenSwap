@@ -12,33 +12,36 @@ import {
   trustWallet,
   ledgerWallet,
   rainbowWallet,
+  binanceWallet,
+  bitgetWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, createConfig, http } from "wagmi";
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string;
 
-// const connectors = connectorsForWallets(
-//   [
-//     {
-//       groupName: "Recommended Wallet",
-//       wallets: [metaMaskWallet],
-//     },
-//     {
-//       groupName: "Other",
-//       wallets: [
-//         trustWallet,
-//         rainbowWallet,
-//         argentWallet,
-//         ledgerWallet,
-//       ],
-//     },
-//   ],
-//   {
-//     appName: "swap-demo",
-//     projectId,
-//   }
-// );
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: "Recommended Wallet",
+      wallets: [metaMaskWallet],
+    },
+    {
+      groupName: "Other",
+      wallets: [
+        trustWallet,
+        binanceWallet,
+        rainbowWallet,
+        bitgetWallet,
+        ledgerWallet,
+      ],
+    },
+  ],
+  {
+    appName: "swap-demo",
+    projectId,
+  }
+);
 
 // Define chain manually
 const mainnet = {
@@ -67,6 +70,7 @@ const config = getDefaultConfig({
   appName: 'AhmadSwap',
   projectId,
   chains: [mainnet],
+  connectors,
   ssr: true,
 });
 
