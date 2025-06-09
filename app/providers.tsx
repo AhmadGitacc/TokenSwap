@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   RainbowKitProvider,
   connectorsForWallets,
+  getDefaultConfig,
 } from "@rainbow-me/rainbowkit";
 import {
   metaMaskWallet,
@@ -17,27 +18,27 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string;
 
-const connectors = connectorsForWallets(
-  [
-    {
-      groupName: "Recommended Wallet",
-      wallets: [metaMaskWallet],
-    },
-    {
-      groupName: "Other",
-      wallets: [
-        trustWallet,
-        rainbowWallet,
-        argentWallet,
-        ledgerWallet,
-      ],
-    },
-  ],
-  {
-    appName: "swap-demo",
-    projectId,
-  }
-);
+// const connectors = connectorsForWallets(
+//   [
+//     {
+//       groupName: "Recommended Wallet",
+//       wallets: [metaMaskWallet],
+//     },
+//     {
+//       groupName: "Other",
+//       wallets: [
+//         trustWallet,
+//         rainbowWallet,
+//         argentWallet,
+//         ledgerWallet,
+//       ],
+//     },
+//   ],
+//   {
+//     appName: "swap-demo",
+//     projectId,
+//   }
+// );
 
 // Define chain manually
 const mainnet = {
@@ -53,13 +54,20 @@ const mainnet = {
   },
 };
 
-const config = createConfig({
+// const config = createConfig({
+//   chains: [mainnet],
+//   // turn off injected provider discovery
+//   multiInjectedProviderDiscovery: false,
+//   connectors,
+//   ssr: true,
+//   transports: { [mainnet.id]: http() },
+// });
+
+const config = getDefaultConfig({
+  appName: 'AhmadSwap',
+  projectId,
   chains: [mainnet],
-  // turn off injected provider discovery
-  multiInjectedProviderDiscovery: false,
-  connectors,
   ssr: true,
-  transports: { [mainnet.id]: http() },
 });
 
 const queryClient = new QueryClient();

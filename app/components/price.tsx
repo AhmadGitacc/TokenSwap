@@ -164,7 +164,7 @@ export default function PriceView({
       <div className="container max-w-sm px-4 py-6 mx-auto sm:max-w-md md:max-w-2xl sm:px-6 sm:py-12">
         <header className="mb-8 text-center sm:mb-12">
           <h1 className="mb-2 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">
-            AhmadSwap Demo
+            TekSwap
           </h1>
           <p className="text-base text-gray-400 sm:text-lg">Swap tokens with ease</p>
         </header>
